@@ -8,6 +8,8 @@
 
 ## Here is how it works
 
+[Demo](https://github.com/artemkovalyov/google-script/blob/master/scan-gdrive-directory-and-output-to-gspreadsheet/demo.gif)
+
 ## How to use it
 
 1. Ad this script to your spreadsheet and create `onOpen()` even for same function
