@@ -46,10 +46,11 @@ function getFilesFromFolder(folder) {
   files.push(["Folder", folderName, ""]);
   while (fileIterator.hasNext()) {
     var file = fileIterator.next();
+    var link = file.getDownloadUrl();
     files.push([
       file.getId(),
       file.getName(),
-      file.getDownloadUrl().replace("&gd=true", "")
+      link === null ? "No downloadable link" : link.replace("&gd=true", "")
     ]);
   }
 
