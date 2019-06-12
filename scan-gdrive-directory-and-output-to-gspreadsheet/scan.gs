@@ -46,11 +46,33 @@ function getFilesFromFolder(folder) {
   files.push(["Folder", folderName, ""]);
   while (fileIterator.hasNext()) {
     var file = fileIterator.next();
+    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    files.push([
+      file.getId(),
+      file.getName(),
+      "http://drive.google.com/uc?export=view&id=" + file.getId()
+    ]);
+  }
+
+  return files;
+}
+
+// getting the files list from folder with ID, Name and downloadable URL
+function getFilesFromFolder(folder) {
+  var files = [];
+  var folderName = folder.getName();
+  var fileIterator = folder.getFiles();
+  files.push(["Folder", folderName, ""]);
+  while (fileIterator.hasNext()) {
+    var file = fileIterator.next();
     var link = file.getDownloadUrl();
     files.push([
       file.getId(),
       file.getName(),
-      link === null ? "No downloadable link" : link.replace("&gd=true", "")
+      // this variant gives you permalink but requires more permissions and publishes files publicly
+      "http://drive.google.com/uc?export=view&id=" + file.getId()
+      //this needs less permissions but will provide you fast expiring links
+      // link === null ? "No downloadable link" : link.replace("&gd=true", "")
     ]);
   }
 
